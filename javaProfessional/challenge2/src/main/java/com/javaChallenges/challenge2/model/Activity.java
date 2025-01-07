@@ -15,14 +15,23 @@ public class Activity {
     private Long id;
 
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
+
     private Double price;
 
-   @ManyToMany(mappedBy = "activities")
+    @ManyToMany(mappedBy = "activities")
     private Set<User> users = new HashSet<>();
 
-    public Activity (){}
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
+    @OneToMany(mappedBy = "activity")
+    private Set<TimeBlock> timeBlocks = new HashSet<>();
+
+    public Activity (){}
     public Activity(Long id, String name, String description, Double price) {
         this.id = id;
         this.name = name;
@@ -60,5 +69,17 @@ public class Activity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<User> getUsers() {
+        return users;
     }
 }

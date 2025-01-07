@@ -18,9 +18,10 @@ public class User {
     private String email;
 
     @ManyToMany
-    @JoinTable(name = "tb_user_activities",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    @JoinTable(
+            name = "tb_user_activity", // Nome da tabela intermediária
+            joinColumns = @JoinColumn(name = "user_id"), // FK para User
+            inverseJoinColumns = @JoinColumn(name = "activity_id"))// FK para Activity
     private Set<Activity> activities = new HashSet<>();
 
     public User(){}
