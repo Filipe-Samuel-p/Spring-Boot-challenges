@@ -31,7 +31,7 @@ public class ClientService {
     public ClientDTO findById(Long id){
 
         Client clientDataBase = repository.findById(id).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
         return new ClientDTO(clientDataBase.getName(), clientDataBase.getCpf(), clientDataBase.getIncome(),
                 clientDataBase.getBirthDate(), clientDataBase.getChildrenQuantity());
 
