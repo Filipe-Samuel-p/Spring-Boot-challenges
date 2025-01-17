@@ -2,6 +2,7 @@ package com.javaChallenges.challenge3.service;
 
 
 import com.javaChallenges.challenge3.dto.ClientDTO;
+import com.javaChallenges.challenge3.exceptions.ResourceNotFoundException;
 import com.javaChallenges.challenge3.model.Client;
 import com.javaChallenges.challenge3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ClientService {
     public ClientDTO findById(Long id){
 
         Client clientDataBase = repository.findById(id).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+                orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + id + " nåo encontrado"));
         return new ClientDTO(clientDataBase.getName(), clientDataBase.getCpf(), clientDataBase.getIncome(),
                 clientDataBase.getBirthDate(), clientDataBase.getChildrenQuantity());
 
