@@ -1,5 +1,6 @@
 package com.javaChallenges.challenge3.model;
 
+import com.javaChallenges.challenge3.dto.ClientDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class Client {
         this.birthDate = birthDate;
         this.income = income;
     }
+
 
     public long getId() {
         return id;

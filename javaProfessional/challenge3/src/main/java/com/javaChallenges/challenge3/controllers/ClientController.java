@@ -2,7 +2,6 @@ package com.javaChallenges.challenge3.controllers;
 
 
 import com.javaChallenges.challenge3.dto.ClientDTO;
-import com.javaChallenges.challenge3.model.Client;
 import com.javaChallenges.challenge3.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,9 +35,10 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<ClientDTO> insert (@RequestBody ClientDTO dto){
 
-        dto = service.includeClient(dto);
-        URI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(dto.);
+        dto = service.insertClient(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(dto.id()).toUri();
+        return ResponseEntity.created(uri).body(dto);
 
 
     }
