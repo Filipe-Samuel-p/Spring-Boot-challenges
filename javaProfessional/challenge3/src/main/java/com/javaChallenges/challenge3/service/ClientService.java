@@ -38,4 +38,25 @@ public class ClientService {
 
     }
 
+    public ClientDTO includeClient(ClientDTO user){
+
+        Client entity = new Client();
+        dtoToEntity(user,entity);
+        entity = repository.save(entity); // Aqui há a persistencia de dados. O método "save" retorna a própria entidade com os dados salvos, como ID inserido automaticamente etc
+        return new ClientDTO(entity.getName(),entity.getCpf(),entity.getIncome(),
+                entity.getBirthDate(),entity.getChildrenQuantity());
+
+    }
+
+
+    private void dtoToEntity(ClientDTO dto, Client entity){
+
+        entity.setName(dto.name());
+        entity.setCpf(dto.cpf());
+        entity.setBirthDate(dto.birthDate());
+        entity.setChildrenQuantity(dto.children_quantity());
+        entity.setIncome(dto.income());
+
+    }
+
 }

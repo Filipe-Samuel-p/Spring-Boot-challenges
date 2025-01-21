@@ -21,7 +21,6 @@ public class ControllerExceptionHandler {
         CustomErrorDTO errorDTO = new CustomErrorDTO(Instant.now(),status.value(),exception.getMessage(),request.getRequestURI());
         return ResponseEntity.status(status).body(errorDTO);
 
-
     }
 
 }
