@@ -37,9 +37,10 @@ public class ClientController {
 
         dto = service.insertClient(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(dto.id()).toUri();
+                .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
 
 
     }
+
 }
