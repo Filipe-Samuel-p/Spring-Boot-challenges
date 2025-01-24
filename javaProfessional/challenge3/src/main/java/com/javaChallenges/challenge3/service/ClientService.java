@@ -56,7 +56,7 @@ public class ClientService {
 
         /*
         O método "getReferenceById() não irá no BD,logo não irá retornar um Optional. Ele pega a referência do objeto.
-        referência esta que será monitorada pela Jpa
+        referência esta que será monitorada pela Jpa.
         */
 
     }
