@@ -5,6 +5,7 @@ import com.javaChallenges.challenge3.dto.ClientDTO;
 import com.javaChallenges.challenge3.exceptions.ResourceNotFoundException;
 import com.javaChallenges.challenge3.model.Client;
 import com.javaChallenges.challenge3.repository.ClientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,10 +21,8 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public Page<ClientDTO> findAll(Pageable pageable){
-
         Page<Client> allClients = repository.findAll(pageable);
         return allClients.map(ClientDTO::new);
-
     }
 
     @Transactional(readOnly = true)
@@ -43,6 +42,21 @@ public class ClientService {
         return new ClientDTO(entity);
 
     }
+
+    @Transactional
+    public ClientDTO updateClient(Long id, ClientDTO dto){
+        try{
+            Client client = repository.getReferenceById(id); // Esse método, não irá retornar um Optional. Ele é pra tratar o erro "EntityReferenceNotFound"
+            dtoToEntity(dto, client);
+            Client entity = repository.save(client);
+            return new ClientDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Cliente com id " + id + " nåo encontrado");
+        }
+
+    }
+
+
 
     private void dtoToEntity(ClientDTO dto, Client entity){
         entity.setName(dto.getName());
