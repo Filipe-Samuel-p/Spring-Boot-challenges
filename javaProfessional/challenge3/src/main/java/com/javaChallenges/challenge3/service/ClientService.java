@@ -46,7 +46,7 @@ public class ClientService {
     @Transactional
     public ClientDTO updateClient(Long id, ClientDTO dto){
         try{
-            Client client = repository.getReferenceById(id); // Esse método, não irá retornar um Optional. Ele é pra tratar o erro "EntityReferenceNotFound"
+            Client client = repository.getReferenceById(id);
             dtoToEntity(dto, client);
             Client entity = repository.save(client);
             return new ClientDTO(entity);
@@ -54,6 +54,10 @@ public class ClientService {
             throw new ResourceNotFoundException("Cliente com id " + id + " nåo encontrado");
         }
 
+        /*
+        O método "getReferenceById() não irá no BD,logo não irá retornar um Optional. Ele pega a referência do objeto.
+        referência esta que será monitorada pela Jpa
+        */
     }
 
 
