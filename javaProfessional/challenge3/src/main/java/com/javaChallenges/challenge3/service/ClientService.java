@@ -2,14 +2,17 @@ package com.javaChallenges.challenge3.service;
 
 
 import com.javaChallenges.challenge3.dto.ClientDTO;
+import com.javaChallenges.challenge3.exceptions.DatabaseException;
 import com.javaChallenges.challenge3.exceptions.ResourceNotFoundException;
 import com.javaChallenges.challenge3.model.Client;
 import com.javaChallenges.challenge3.repository.ClientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -58,6 +61,24 @@ public class ClientService {
         O método "getReferenceById() não irá no BD,logo não irá retornar um Optional. Ele pega a referência do objeto.
         referência esta que será monitorada pela Jpa.
         */
+
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void deleteClient(Long id){
+
+       if(!repository.existsById(id)){
+           throw new ResourceNotFoundException("Cliente com id " + id + " nåo encontrado");
+       }
+
+       try{
+           repository.deleteById(id);
+       }
+       catch (DataIntegrityViolationException e){
+           throw new DatabaseException("Falha de integridade referencial");
+       }
+
+
 
     }
 
