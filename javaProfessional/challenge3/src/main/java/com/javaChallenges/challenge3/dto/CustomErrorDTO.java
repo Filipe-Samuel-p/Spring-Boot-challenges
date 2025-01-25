@@ -1,10 +1,24 @@
 package com.javaChallenges.challenge3.dto;
 
-import java.time.Instant;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public record CustomErrorDTO (Instant timestamp,
-         Integer status, String error, String path){
+import java.time.Instant;
+import java.time.LocalDate;
+
+@AllArgsConstructor
+@Getter
+public class CustomErrorDTO{
+
+    private Instant timestamp;
+    private Integer status;
+    private String error;
+    private String path;
+
 
 
 }
+
+
+
 

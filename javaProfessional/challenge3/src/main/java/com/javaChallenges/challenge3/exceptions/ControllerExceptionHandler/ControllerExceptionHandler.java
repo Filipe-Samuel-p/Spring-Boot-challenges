@@ -2,6 +2,7 @@ package com.javaChallenges.challenge3.exceptions.ControllerExceptionHandler;
 
 
 import com.javaChallenges.challenge3.dto.CustomErrorDTO;
+import com.javaChallenges.challenge3.dto.ValidationErrorDTO;
 import com.javaChallenges.challenge3.exceptions.DatabaseException;
 import com.javaChallenges.challenge3.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,5 +31,16 @@ public class ControllerExceptionHandler {
         CustomErrorDTO err = new CustomErrorDTO(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<CustomErrorDTO> methodArgumentNotValidation(MethodArgumentNotValidException error, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        ValidationErrorDTO err = new ValidationErrorDTO(Instant.now(), status.value(), "Dados inválidos", request.getRequestURI());
+        for (FieldError f : error.getBindingResult().getFieldErrors()) {
+            err.addError(f.getField(), f.getDefaultMessage());
+        }
+        return ResponseEntity.status(status).body(err);
+    }
+
 
 }
