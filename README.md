@@ -29,4 +29,4 @@ Basta clicar para ser direcionado a pasta correta do desafio
 
 - <a href="https://github.com/Filipe-Samuel-p/Spring-Boot-challenges/tree/main/javaProfessional/dependency_injection">Injeção de dependência</a>
 - <a href="https://github.com/Filipe-Samuel-p/Spring-Boot-challenges/tree/main/javaProfessional/JPA_Hibernate">JPA/Hibernate</a>
-- <a href="https://github.com/Filipe-Samuel-p/Spring-Boot-challenges/tree/main/javaProfessional/RESTful_API">API RESTful</a>
+- <a href="https://github.com/Filipe-Samuel-p/Spring-Boot-challenges/tree/main/javaProfessional/RESTful_API">API-RESTful</a>
