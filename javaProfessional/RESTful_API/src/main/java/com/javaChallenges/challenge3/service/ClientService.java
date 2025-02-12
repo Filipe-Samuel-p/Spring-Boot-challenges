@@ -82,8 +82,6 @@ public class ClientService {
 
     }
 
-
-
     private void dtoToEntity(ClientDTO dto, Client entity){
         entity.setName(dto.getName());
         entity.setCpf(dto.getCpf());
