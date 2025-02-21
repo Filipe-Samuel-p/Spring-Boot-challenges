@@ -26,7 +26,6 @@ public class EmailService {
         message.setTo(dto.getToWho());
         message.setSubject(dto.getTitle());
         message.setText(dto.getMessage());
-
         sender.send(message);
     }
 }

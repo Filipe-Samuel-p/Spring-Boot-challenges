@@ -23,6 +23,7 @@ public class EmailController {
     public ResponseEntity<EmailDTO> sendEmail(@RequestBody EmailDTO dto){
         service.sendEmail(dto);
         return ResponseEntity.ok(dto);
+
     }
 
 }
