@@ -22,6 +22,7 @@ public class EmailDTO {
         this.message = message;
     }
 
+
     public String getOwner() {
         return owner;
     }
