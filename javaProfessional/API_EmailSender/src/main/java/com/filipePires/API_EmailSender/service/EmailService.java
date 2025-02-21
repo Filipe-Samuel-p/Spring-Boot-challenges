@@ -28,7 +28,6 @@ public class EmailService {
         message.setText(dto.getMessage());
 
         sender.send(message);
-
     }
 }
 
